@@ -6,7 +6,7 @@ const app = express();
 // Agregado de una ruta de bienvenida que devuelve un HTML
 
 app.get("/", (req, res) => {
-  res.send("<h1>Bienvenido a la API REST</h1>");
+  res.send("<h1>Bienvenido a la API REST FULL</h1>");
 });
 
 // Agregado de una ruta que devuelve un JSON

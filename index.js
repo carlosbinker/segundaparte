@@ -36,14 +36,24 @@ app.get("/products/:idproduct", (req, res) => {
 
   // Vamos a agregar la respuesta con status 404 cuando el recurso no se encuentra, en este caso el producto con un dado idproduct
 
-  if (!product) {
-    // si product me da un undefined
+  // if (!product) {
+  //   // si product me da un undefined
 
-    res.status(404)
-    res.send('No existe el producto indicado')
-  }
-  res.json(product)
-  console.log(product)
+  //   res.status(404)
+  //   res.send('No existe el producto indicado')
+  // }
+  // res.json(product)
+  // console.log(product)
+
+  // Voy a corregir lo anteior, no perdamos de vista que esto es una API, por lo tanto la respuesta deberá ser también un JSON
+
+  if (!product) {
+      // si product me da un undefined
+  
+      res.status(404).json({error: "No existe el producto"})
+    }
+    res.json(product)
+    console.log(product)
   
 });
 

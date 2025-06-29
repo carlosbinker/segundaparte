@@ -23,12 +23,18 @@ app.get("/products", (req, res) => {
   res.send(products);
 });
 
-// Segunda ruta con GET pero usando params (la idea es traer el producto indicado por el id, ejemplo /products/2)
+// Segunda ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
 
 app.get("/products/:idproduct", (req, res) => {
-  console.log(req.params)
+  // console.log(req.params)
   const {idproduct} = req.params
-  console.log(idproduct)
+  // console.log(idproduct)
+
+  // Por lo tanto para obtener el producto dado por idproduct usamos el método find para recorrer el array de productos
+
+  const product = products.find((product) => idproduct == product.id)
+  res.json(product)
+  console.log(product)
   
 });
 

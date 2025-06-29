@@ -18,10 +18,19 @@ const products = [
   { id: 4, nombre: "queso cuartirolo", precio: 860, vencimiento: "13/9/26" },
 ];
 
+// Primera ruta con GET trayendo todos los productos
 app.get("/products", (req, res) => {
   res.send(products);
 });
 
+// Segunda ruta con GET pero usando params (la idea es traer el producto indicado por el id, ejemplo /products/2)
+
+app.get("/products/:idproduct", (req, res) => {
+  console.log(req.params)
+  const {idproduct} = req.params
+  console.log(idproduct)
+  
+});
 
 
 //Escucho en el puerto 3000

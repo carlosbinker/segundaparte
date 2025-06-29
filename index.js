@@ -33,10 +33,21 @@ app.get("/products/:idproduct", (req, res) => {
   // Por lo tanto para obtener el producto dado por idproduct usamos el método find para recorrer el array de productos
 
   const product = products.find((product) => idproduct == product.id)
+
+  // Vamos a agregar la respuesta con status 404 cuando el recurso no se encuentra, en este caso el producto con un dado idproduct
+
+  if (!product) {
+    // si product me da un undefined
+
+    res.status(404)
+    res.send('No existe el producto indicado')
+  }
   res.json(product)
   console.log(product)
   
 });
+
+
 
 
 //Escucho en el puerto 3000

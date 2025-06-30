@@ -113,6 +113,19 @@ app.post("/products", (req, res) => {
   res.status(201).json(newProduct);
 });
 
+// Quinta ruta ahora con método PUT
+
+app.put("/products/:id", (req, res) => {
+  
+  const productId = parseInt(req.params.id, 10);
+  const productIndex = products.findIndex((objeto) => objeto.id === productId);
+
+  const { nombre, precio, vencimiento } = req.body;
+
+  products[productIndex] = { id: productId, nombre, precio, vencimiento };
+  res.json(products[productIndex]);
+});
+
 
 //Escucho en el puerto 3000
 

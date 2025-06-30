@@ -1,5 +1,7 @@
 // Importo Express
 import express from "express";
+// Importo cors
+import cors from "cors";
 // Creo la instancia
 const app = express();
 
@@ -21,6 +23,7 @@ const products = [
 // Antes de la declaración de todas las rutas ponemos los middlewares
 
 app.use(express.json()) // Middleware para poder ver el req.query
+app.use(cors())
 
 // Primera ruta con GET trayendo todos los productos
 app.get("/products", (req, res) => {

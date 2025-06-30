@@ -58,6 +58,17 @@ app.get("/products/:idproduct", (req, res) => {
 });
 
 
+// Tercera ruta con GET pero ahora empleando query string
+
+// El Query String (o cadena de consulta en español) es una parte fundamental de una URL (Uniform Resource Locator) que se utiliza para enviar información adicional del cliente al servidor web. Es un mecanismo estándar en el protocolo HTTP para pasar datos a través de la URL, cuando se usa el método GET.
+
+// Un Query String siempre comienza con un signo de interrogación (?) y se adjunta al final de la ruta de la URL. Después del ?, los datos se organizan en pares clave-valor, separados por el signo igual (=). Si hay múltiples pares clave-valor, se separan entre sí con el signo ampersand (&).
+
+app.get("/products/search", (req, res) => {
+  console.log(req.query);
+  res.send(products)
+});
+
 
 
 //Escucho en el puerto 3000

@@ -81,27 +81,33 @@ app.get("/products/:idproduct", (req, res) => {
 // Cuarta ruta con POST
 
 app.post("/products", (req, res) => {
-  console.log(req.body)
+  // Imprimo en consola el nuevo producto recibido en el body
+  console.log(req.body);
   // Una forma de obtener los parámetros del body
   // const nombre = req.body.nombre
   // const precio = req.body.precio
   // const vencimiento = req.body.vencimiento
 
-  // Otra manera mediante desestructuración
+  // Otra manera de obtener los parámetros del body es mediante desestructuración
 
   const { nombre, precio, vencimiento } = req.body;
-  console.log(nombre, precio, vencimiento)
+  // Muestro las propiedades
+  console.log(nombre, precio, vencimiento);
   // res.send('POST');
+
+  // Creo un nuevo producto para ser insertado en el array. La forma de probar esto es armando un objeto JSON con las 3 propiedades indicadas, es decir nombre, precio y vencimiento, el cual formará parte del body del mensaje http request enviado al server.
+
   const newProduct = {
     id: products.length + 1,
     nombre,
     precio,
-    vencimiento
-  }
+    vencimiento,
+  };
+
+  // Lo introduzco al array mediante el método push y envío un status 201 indicando que se creó un nuevo producto (nuevo recurso)
 
   products.push(newProduct);
-  res.status(201).json(newProduct)
-
+  res.status(201).json(newProduct);
 });
 
 

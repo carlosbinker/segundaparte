@@ -20,7 +20,7 @@ const products = [
 
 // Antes de la declaración de todas las rutas ponemos los middlewares
 
-app.use(express.json())
+app.use(express.json()) // Middleware para poder ver el req.query
 
 // Primera ruta con GET trayendo todos los productos
 app.get("/products", (req, res) => {
@@ -82,7 +82,25 @@ app.get("/products/:idproduct", (req, res) => {
 
 app.post("/products", (req, res) => {
   console.log(req.body)
-  res.send('POST');
+  // Una forma de obtener los parámetros del body
+  // const nombre = req.body.nombre
+  // const precio = req.body.precio
+  // const vencimiento = req.body.vencimiento
+
+  // Otra manera mediante desestructuración
+
+  const { nombre, precio, vencimiento } = req.body;
+  console.log(nombre, precio, vencimiento)
+  // res.send('POST');
+  const newProduct = {
+    id: products.length + 1,
+    nombre,
+    precio,
+    vencimiento
+  }
+
+  products.push(newProduct);
+  res.status(201).json(newProduct)
 
 });
 

@@ -120,11 +120,18 @@ app.put("/products/:id", (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const productIndex = products.findIndex((objeto) => objeto.id === productId);
 
+  if (productIndex === -1) {
+    return res.status(404).json({ error: "Producto no encontrado" });
+  }
+
   const { nombre, precio, vencimiento } = req.body;
 
   products[productIndex] = { id: productId, nombre, precio, vencimiento };
   res.json(products[productIndex]);
 });
+
+// Sexta ruta con DELETE
+
 
 
 //Escucho en el puerto 3000

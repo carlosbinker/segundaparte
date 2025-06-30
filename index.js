@@ -23,7 +23,24 @@ app.get("/products", (req, res) => {
   res.send(products);
 });
 
-// Segunda ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
+// Segunda ruta con GET pero ahora empleando query string -- se cambió el orden, antes se había puesto como tercera opción.
+
+// El Query String (o cadena de consulta en español) es una parte fundamental de una URL (Uniform Resource Locator) que se utiliza para enviar información adicional del cliente al servidor web. Es un mecanismo estándar en el protocolo HTTP para pasar datos a través de la URL, cuando se usa el método GET.
+
+// Un Query String siempre comienza con un signo de interrogación (?) y se adjunta al final de la ruta de la URL. Después del ?, los datos se organizan en pares clave-valor, separados por el signo igual (=). Si hay múltiples pares clave-valor, se separan entre sí con el signo ampersand (&).
+
+app.get("/products/search", (req, res) => {
+  // console.log(req.query);
+
+  // Desestructuro por ejemplo el atributo nombre que me llega por query
+
+const {nombre} = req.query
+  const filteredProducts = products.filter((objeto) => objeto.nombre.toLowerCase().includes(nombre.toLowerCase()));
+  res.json(filteredProducts)
+});
+
+
+// Tercera ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
 
 app.get("/products/:idproduct", (req, res) => {
   // console.log(req.params)
@@ -55,18 +72,6 @@ app.get("/products/:idproduct", (req, res) => {
     res.json(product)
     console.log(product)
   
-});
-
-
-// Tercera ruta con GET pero ahora empleando query string
-
-// El Query String (o cadena de consulta en español) es una parte fundamental de una URL (Uniform Resource Locator) que se utiliza para enviar información adicional del cliente al servidor web. Es un mecanismo estándar en el protocolo HTTP para pasar datos a través de la URL, cuando se usa el método GET.
-
-// Un Query String siempre comienza con un signo de interrogación (?) y se adjunta al final de la ruta de la URL. Después del ?, los datos se organizan en pares clave-valor, separados por el signo igual (=). Si hay múltiples pares clave-valor, se separan entre sí con el signo ampersand (&).
-
-app.get("/products/search", (req, res) => {
-  console.log(req.query);
-  res.send(products)
 });
 
 

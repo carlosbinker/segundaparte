@@ -12,11 +12,15 @@ app.get("/", (req, res) => {
 // Agregado de una ruta que devuelve un JSON
 
 const products = [
-  { id: 1, nombre: "queso fresco", precio: 800, vencimiento: "30/11/25" },
+  { id: 1, nombre: "queso fresco rallado", precio: 800, vencimiento: "30/11/25" },
   { id: 2, nombre: "queso roquefort", precio: 1200, vencimiento: "3/10/25" },
   { id: 3, nombre: "queso port salut", precio: 650, vencimiento: "16/8/25" },
   { id: 4, nombre: "queso cuartirolo", precio: 860, vencimiento: "13/9/26" },
 ];
+
+// Antes de la declaración de todas las rutas ponemos los middlewares
+
+app.use(express.json())
 
 // Primera ruta con GET trayendo todos los productos
 app.get("/products", (req, res) => {
@@ -34,11 +38,11 @@ app.get("/products/search", (req, res) => {
 
   // Desestructuro por ejemplo el atributo nombre que me llega por query
 
-const {nombre} = req.query
+  const { nombre } = req.query
+  console.log(nombre)
   const filteredProducts = products.filter((objeto) => objeto.nombre.toLowerCase().includes(nombre.toLowerCase()));
   res.json(filteredProducts)
 });
-
 
 // Tercera ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
 
@@ -74,6 +78,13 @@ app.get("/products/:idproduct", (req, res) => {
   
 });
 
+// Cuarta ruta con POST
+
+app.post("/products", (req, res) => {
+  console.log(req.body)
+  res.send('POST');
+
+});
 
 
 //Escucho en el puerto 3000

@@ -132,6 +132,16 @@ app.put("/products/:id", (req, res) => {
 
 // Sexta ruta con DELETE
 
+app.delete("/products/:id", (req, res) => {
+  const productId = parseInt(req.params.id, 10);
+  const productIndex = products.findIndex((objeto) => objeto.id === productId);
+
+  if (productIndex === -1) {
+    return res.status(404).json({error: "Producto no encontrado para su borrado"});
+  }
+  products.splice(productIndex, 1);
+  res.status(204).send();
+})
 
 
 //Escucho en el puerto 3000

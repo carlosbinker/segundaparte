@@ -139,10 +139,17 @@ app.delete("/products/:id", (req, res) => {
   if (productIndex === -1) {
     return res.status(404).json({error: "Producto no encontrado para su borrado"});
   }
-  products.splice(productIndex, 1);
-  res.status(204).send();
+  products.splice(productIndex, 1); // Indica que me quita 1 elemento del array
+  res.status(204).send(); // La convención 204 indica que se borra un recurso y el send() indica que no tiene contenido
 })
 
+// Middleware propio para detectar que se escibe mal el recurso al que se quiere acceder (Error handle)
+
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Not fund' });
+})
+
+// NOTA: el next se usará más adelante para indicar que sigue otro middleware, por ejemplo un login
 
 //Escucho en el puerto 3000
 

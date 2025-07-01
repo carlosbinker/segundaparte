@@ -8,7 +8,7 @@ const app = express();
 // Agregado de una ruta de bienvenida que devuelve un HTML
 
 app.get("/", (req, res) => {
-  res.send("<h1>Bienvenido a la API REST</h1>");
+  res.json({message: "API Rest en Node.js"});
 });
 
 // Ahora acá voy a importar el router desde el módulo products.router.js, creando una instancia llamada productsRouter

@@ -6,22 +6,28 @@ export { Router } from 'express';
 // Creo una instancia de Router
 const router = Router();
 
-// Agregado de una ruta que devuelve un JSON
-// Listado de productos (array con objetos JSON)
+// Listado de productos (array con objetos JSON) -- Lo mudamos ahora desde el módulo products.router.js
 
 const products = [
-  { id: 1, nombre: "queso fresco rallado", precio: 800, vencimiento: "30/11/25" },
-  { id: 2, nombre: "queso roquefort", precio: 1200, vencimiento: "3/10/25" },
-  { id: 3, nombre: "queso port salut", precio: 650, vencimiento: "16/8/25" },
-  { id: 4, nombre: "queso cuartirolo", precio: 860, vencimiento: "13/9/26" },
-];
+    {
+      id: 1,
+      nombre: "queso fresco rallado",
+      precio: 800,
+      vencimiento: "30/11/25",
+    },
+    { id: 2, nombre: "queso roquefort", precio: 1200, vencimiento: "3/10/25" },
+    { id: 3, nombre: "queso port salut", precio: 650, vencimiento: "16/8/25" },
+    { id: 4, nombre: "queso cuartirolo", precio: 860, vencimiento: "13/9/26" },
+  ];
 
-// Acá vamos a traernos todas las rutas con sus métodos (esquema CRUD) que teníamos en index.js, y vamos a reemplazar router por router
+// Acá vamos a traernos todas las rutas con sus métodos (esquema CRUD) que teníamos en index.js, y vamos a reemplazar app por router
+
+// Ahora voy a importar el controlador desde products.controller.js (tiene que ser obligatorio ahora una importación nombrada)
+
+import { getAllProducts } from '../controllers/products.controller.js';
 
 // Primera ruta con GET trayendo todos los productos
-router.get("/products", (req, res) => {
-    res.send(products);
-  });
+router.get("/products", getAllProducts);
   
 // Segunda ruta con GET pero ahora empleando query string -- se cambió el orden, antes se había puesto como tercera opción.
   

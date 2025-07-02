@@ -5,24 +5,30 @@ import cors from "cors";
 // Creo la instancia
 const app = express();
 
-// Agregado de una ruta de bienvenida que devuelve un HTML
+// Acá va el middleware de mantenimiento
+
+app.use((req, res, next) => {
+  res.json({ message: "En mantenimiento" })
+});
+
+// Antes de la declaración de todas las rutas ponemos todos los middlewares
+
+app.use(express.json()) // Middleware para poder ver el req.query (debe estar antes del import productsRouter)
+app.use(cors()) // Middleware de cors para permitir peticiones desde otro dominio
+
+// Agregado de una ruta de bienvenida que devuelve un JSON (tal como corresponde a una API Rest)
 
 app.get("/", (req, res) => {
   res.json({message: "API Rest en Node.js"});
 });
 
-// Ahora acá voy a importar el router desde el módulo products.router.js, creando una instancia llamada productsRouter
 
+
+// Ahora acá voy a importar el router desde el módulo products.router.js, creando una instancia llamada productsRouter
 import productsRouter from './src/routes/products.router.js'
 
 // Ahora simplemente le digo a la app que utilice productsRouter (que contiene todas las rutas que se crearon previamente aquí. Ver clase 11)
 app.use('/api', productsRouter);
-
-// Antes de la declaración de todas las rutas ponemos los middlewares
-
-app.use(express.json()) // Middleware para poder ver el req.query
-app.use(cors()) // Middleware de cors para permitir peticiones desde otro dominio
-
 
 // Middleware propio para detectar que se escibe mal el recurso al que se quiere acceder (Error handle)
 

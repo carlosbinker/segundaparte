@@ -5,11 +5,11 @@ import cors from "cors";
 // Creo la instancia
 const app = express();
 
-// Acá va el middleware de mantenimiento
+// Acá va el middleware de mantenimiento (comentado cuando no está en mantenimiento)
 
-app.use((req, res, next) => {
-  res.json({ message: "En mantenimiento" })
-});
+// app.use((req, res, next) => {
+//   res.json({ message: "En mantenimiento" })
+// });
 
 // Antes de la declaración de todas las rutas ponemos todos los middlewares
 
@@ -21,8 +21,6 @@ app.use(cors()) // Middleware de cors para permitir peticiones desde otro domini
 app.get("/", (req, res) => {
   res.json({message: "API Rest en Node.js"});
 });
-
-
 
 // Ahora acá voy a importar el router desde el módulo products.router.js, creando una instancia llamada productsRouter
 import productsRouter from './src/routes/products.router.js'

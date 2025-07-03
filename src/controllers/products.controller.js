@@ -2,13 +2,15 @@ import * as service from '../services/products.service.js'
 
 // Exporto el controlador que me va a traer toods los productos desde el array ficticio que me simula por ahora el modelo de la BD
 export const getAllProducts = (req, res) => {
-    res.send(service.getAllProducts());
+  res.send(service.getAllProducts());
+  console.log(service.getAllProducts())
 };
 
 export const searchProducts = (req, res) => {
   const { nombre } = req.query;
   const filteredProducts = service.getAllProducts().filter((objeto) => objeto.nombre.toLowerCase().includes(nombre.toLowerCase()));
   res.json(filteredProducts);
+  console.log("Los productos filtrados son:\n", filteredProducts);
 };
 
 export const getProductById = (req, res) => {
@@ -20,12 +22,13 @@ export const getProductById = (req, res) => {
     res.status(404).json({ error: "No existe el producto" });
   }
   res.json(product);
+  console.log("El producto encontrado es:\n", product);
 };
 
 export const addNewProduct = (req, res) => {
   const { nombre, precio, vencimiento } = req.body;
   // Muestro las propiedades
-  console.log(nombre, precio, vencimiento);
+  console.log("Valores recibidos por body:", nombre, precio, vencimiento);
   // Creo un nuevo producto para ser insertado en el array. La forma de probar esto es armando un objeto JSON con las 3 propiedades indicadas, es decir nombre, precio y vencimiento, el cual formará parte del body del mensaje http request enviado al server.
 
   const newProduct = {
@@ -39,6 +42,7 @@ export const addNewProduct = (req, res) => {
 
   service.getAllProducts().push(newProduct);
   res.status(201).json(newProduct);
+  console.log("El producto añadido es:\n", newProduct);
 };
 
 export const updateProductById = (req, res) => {
@@ -58,6 +62,7 @@ export const updateProductById = (req, res) => {
     vencimiento,
   };
   res.json(service.getAllProducts()[productIndex]);
+  console.log("El producto actualizado es:\n",service.getAllProducts()[productIndex]);
 };
 
 export const deleteProductById = (req, res) => {

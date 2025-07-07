@@ -14,3 +14,54 @@ const products = [
 ];
 
 export const getAllProducts = () => { return products };
+
+export const searchProducts = (nombre) => { return products.filter((objeto) => objeto.nombre.toLowerCase().includes(nombre.toLowerCase())) };
+
+export const getProductById = (id) => { return products.find((objeto) => id == objeto.id) };
+
+// export const addNewProduct = (nombre, precio, vencimiento) => {
+
+//   const newProduct = {
+//     id: products.length + 1,
+//     nombre,
+//     precio,
+//     vencimiento
+//   };
+
+//   products.push(newProduct);
+//   return newProduct;
+// };
+
+// Otra variante
+export const addNewProduct = (data) => {
+  //   console.log({ ...data });
+
+  const newProduct = {
+    id: products.length + 1,
+    ...data,
+  };
+
+  products.push(newProduct);
+  return newProduct;
+};
+
+// Actualizo el producto en el array de productos, según el id recibido
+export const updateProductById = (productId, data) => {
+  const productIndex = products.findIndex((objeto) => objeto.id === productId);
+
+  console.log(productIndex);
+
+  products[productIndex] = {
+    id: productIndex+1,
+    ...data
+  };
+  return products[productIndex];
+};
+
+// Borro el producto dado por el Id
+export const deletedProduct = (productId) => {
+  const productIndex = products.findIndex((objeto) => objeto.id === productId);
+
+  return products.splice(productIndex, 1); // Indica que me quita 1 elemento del array
+
+};

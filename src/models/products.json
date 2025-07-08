@@ -1,0 +1,7 @@
+[ { "id": 1, "nombre": "queso fresco", "precio": 800, "vencimiento": "30/11/25"},
+  { "id": 2, "nombre":  "queso Roquefort", "precio": 1200, "vencimiento": "3/10/25" },
+  { "id": 3, "nombre":  "queso Port salut", "precio": 650, "vencimiento": "16/8/25" },
+  { "id": 4, "nombre":  "queso Gruyere", "precio": 860, "vencimiento": "13/9/26" },
+  { "id": 5, "nombre":  "queso Provolone", "precio": 975, "vencimiento": "13/9/26" },
+  { "id": 6, "nombre": "queso Mar del Plata", "precio": 9855, "vencimiento": "2/8/2029"}
+]

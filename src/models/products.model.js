@@ -35,7 +35,7 @@ export const updateProductById = (productId, data) => {
 };
 
 // Método DELETE - Borro el producto dado por el Id
-export const deletedProduct = (productId) => {
+export const deleteProductById = (productId) => {
   const productIndex = products.findIndex((objeto) => objeto.id === productId);
   return products.splice(productIndex, 1); 
 };

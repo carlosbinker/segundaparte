@@ -1,21 +1,21 @@
-import * as model from '../models/products.model.js'
+import * as service from '../services/products.service.js'
 
 // Método GET - obtengo todos los productos de un JSON
 export const getAllProducts = (req, res) => {
-  res.send(model.getAllProducts());
+  res.send(service.getAllProducts());
 };
 
 // Método GET - recibiendo query string en la URL en req.query
 export const searchProducts = (req, res) => {
   const { nombre } = req.query;
-  const filteredProducts = model.searchProducts(nombre);
+  const filteredProducts = service.searchProducts(nombre);
   res.json(filteredProducts);
 };
 
 // Método GET - recibiendo un id como params en la URL en req.params
 export const getProductById = (req, res) => {
   const { id } = req.params;
-  const product = model.getProductById(id);
+  const product = service.getProductById(id);
   if (!product) {
     res.status(404).json({ error: "No existe el producto" });
   }
@@ -25,7 +25,7 @@ export const getProductById = (req, res) => {
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body
 export const addNewProduct = (req, res) => {
   const { nombre, precio, vencimiento } = req.body;
-  const newProduct = model.addNewProduct({ nombre, precio, vencimiento});
+  const newProduct = service.addNewProduct({ nombre, precio, vencimiento});
   res.status(201).json(newProduct);
 };
 
@@ -33,7 +33,7 @@ export const addNewProduct = (req, res) => {
 export const updateProductById = (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const { nombre, precio, vencimiento } = req.body;
-  const updateProduct = model.updateProductById(productId, {nombre, precio, vencimiento});
+  const updateProduct = service.updateProductById(productId, {nombre, precio, vencimiento});
   if (updateProduct === -1) {
     return res.status(404).json({ error: "Producto no encontrado" });
   }
@@ -44,7 +44,7 @@ export const updateProductById = (req, res) => {
 // Método DELETE - Delete Product
 export const deleteProductById = (req, res) => {
   const productId = parseInt(req.params.id, 10);
-  const deletedProduct = model.deletedProduct(productId);
+  const deletedProduct = service.deleteProductById(productId);
   if (deletedProduct == -1) {
     return res.status(404).json({ error: "Producto no encontrado para su borrado" });
   }

@@ -1,8 +1,8 @@
-import * as model from '../models/products.model.js'
+import * as model from '../models/Product.js'
 
 // Método GET - obtengo todos los productos de un JSON
-export const getAllProducts = (req, res) => {
-  res.send(model.getAllProducts());
+export const getAllProducts = async (req, res) => {
+  res.send(await model.getAllProducts());
 };
 
 // Método GET - recibiendo query string en la URL en req.query

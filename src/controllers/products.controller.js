@@ -2,7 +2,10 @@ import * as model from '../models/Product.js'
 
 // Método GET - obtengo todos los productos de Firestore
 export const getAllProducts = async (req, res) => {
-  res.send(await model.getAllProducts());
+  const products = await model.getAllProducts();
+  // res.send(await model.getAllProducts());
+  res.send(products);
+  console.log(products);
 };
 
 // Método GET - recibiendo query string en la URL en req.query
@@ -20,6 +23,7 @@ export const getProductById = async (req, res) => {
     res.status(404).json({ error: "No existe el producto" });
   }
   res.json(product);
+  console.log(product);
 };
 
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body

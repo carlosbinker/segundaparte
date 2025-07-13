@@ -28,8 +28,8 @@ export const getProductById = async (req, res) => {
 
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body
 export const addNewProduct = async (req, res) => {
-  const { nombre, precio, vencimiento, perecedero } = req.body;
-  const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero});
+  const { nombre, precio, vencimiento, perecedero, keyWords } = req.body;
+  const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero, keyWords});
   res.status(201).json(newProduct);
 };
 

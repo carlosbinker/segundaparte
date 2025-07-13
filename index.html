@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const product = {nombre: "queso mozarella", precio: 3684, vencimiento: "13/8/25"};
+
+        fetch("http://localhost:3000/products", {
+            method: "POST",
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(product),
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        
+    </script>
+</body>
+</html>

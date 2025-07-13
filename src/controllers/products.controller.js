@@ -3,7 +3,6 @@ import * as model from '../models/Product.js'
 // Método GET - obtengo todos los productos de Firestore
 export const getAllProducts = async (req, res) => {
   const products = await model.getAllProducts();
-  // res.send(await model.getAllProducts());
   res.send(products);
   console.log(products);
 };
@@ -24,12 +23,13 @@ export const getProductById = async (req, res) => {
   }
   res.json(product);
   console.log(product);
+  // console.log(typeof product)
 };
 
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body
-export const addNewProduct = (req, res) => {
-  const { nombre, precio, vencimiento } = req.body;
-  const newProduct = model.addNewProduct({ nombre, precio, vencimiento});
+export const addNewProduct = async (req, res) => {
+  const { nombre, precio, vencimiento, perecedero } = req.body;
+  const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero});
   res.status(201).json(newProduct);
 };
 

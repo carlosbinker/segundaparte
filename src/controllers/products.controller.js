@@ -1,6 +1,6 @@
 import * as model from '../models/Product.js'
 
-// Método GET - obtengo todos los productos de un JSON
+// Método GET - obtengo todos los productos de Firestore
 export const getAllProducts = async (req, res) => {
   res.send(await model.getAllProducts());
 };
@@ -12,10 +12,10 @@ export const searchProducts = (req, res) => {
   res.json(filteredProducts);
 };
 
-// Método GET - recibiendo un id como params en la URL en req.params
-export const getProductById = (req, res) => {
+// Método GET - obtengo un solo documento referenciado por el id en la URL desde Firestore
+export const getProductById = async (req, res) => {
   const { id } = req.params;
-  const product = model.getProductById(id);
+  const product = await model.getProductById(id);
   if (!product) {
     res.status(404).json({ error: "No existe el producto" });
   }

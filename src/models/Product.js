@@ -1,7 +1,7 @@
 // Importo la BD
 import { db } from './firebase.js';
 
-import { addDoc, collection, doc, getDoc, getDocs} from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs} from 'firebase/firestore';
 // console.log(typeof collection);
 
 const productsCollection = collection (db, "products");
@@ -31,11 +31,31 @@ export const getProductById = async (id) => {
 
 // Crear un documento usando el método addDoc va por POST
 
-export const addNewProduct =  async (data) => {
+export const addNewProduct = async (data) => {
     try {
         const docRef = await addDoc(productsCollection, data);
         return { id: docRef.id, ...data };
     } catch (error) {
         console.error(error);
     }
+};
+
+// Borrar un producto
+
+export const deletedProductById = async (id) => {
+    try {
+        const productRef = doc(productsCollection, id);
+        console.log(productRef);
+        const snapshot = await getDoc(productRef);
+
+        if (!snapshot.exists()) {
+          return false;
+        }
+
+        await deleteDoc(productRef);
+        return true;
+    } catch (error) {
+        console.error(error);
+    }
+    
 }

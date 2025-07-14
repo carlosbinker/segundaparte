@@ -46,10 +46,12 @@ export const updateProductById = (req, res) => {
 };
 
 // Método DELETE - Delete Product
-export const deleteProductById = (req, res) => {
-  const productId = parseInt(req.params.id, 10);
-  const deletedProduct = model.deletedProduct(productId);
-  if (deletedProduct == -1) {
+export const deleteProductById = async (req, res) => {
+  // const productId = parseInt(req.params.id, 10);
+   const productId = req.params.id;
+  // console.log(productId);
+  const deletedProduct = await model.deletedProductById(productId);
+  if (!deletedProduct) {
     return res.status(404).json({ error: "Producto no encontrado para su borrado" });
   }
   res.status(204).send(); // La convención 204 indica que se borra un recurso y el send() indica que no tiene contenido

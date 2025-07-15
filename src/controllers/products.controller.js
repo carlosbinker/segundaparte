@@ -4,7 +4,7 @@ import * as model from '../models/Product.js'
 export const getAllProducts = async (req, res) => {
   const products = await model.getAllProducts();
   res.send(products);
-  console.log(products);
+  // console.log(products);
 };
 
 // Método GET - recibiendo query string en la URL en req.query
@@ -34,14 +34,15 @@ export const addNewProduct = async (req, res) => {
 };
 
 // Método PUT - Update Product, la actualización del producto se recibe por req.body al igual que POST
-export const updateProductById = (req, res) => {
-  const productId = parseInt(req.params.id, 10);
-  const { nombre, precio, vencimiento } = req.body;
-  const updateProduct = model.updateProductById(productId, {nombre, precio, vencimiento});
-  if (updateProduct === -1) {
+export const updateProductById = async (req, res) => {
+  const productId = req.params.id;
+  const productData = req.body;
+
+  const updateProduct = await model.updateProductById(productId, productData);
+  if (!updateProduct) {
     return res.status(404).json({ error: "Producto no encontrado" });
   }
-  res.json(updateProduct);
+  res.status(200).json(updateProduct);
   console.log("El producto actualizado es:\n", updateProduct);
 };
 

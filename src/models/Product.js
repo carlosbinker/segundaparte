@@ -1,10 +1,11 @@
 // Importo la BD
 import { db } from './firebase.js';
 
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs} from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc} from 'firebase/firestore';
 // console.log(typeof collection);
 
-const productsCollection = collection (db, "products");
+const productsCollection = collection(db, "products");
+// console.log(productsCollection)
 
 // *********************Métodos GET*************************************
 //getAllProdusts
@@ -22,7 +23,9 @@ export const getProductById = async (id) => {
 
     try {
         const productRef = doc(productsCollection, id);
+        //  const productRef = doc(db, 'products', id);
         const snapshot = await getDoc(productRef);
+        // console.log(snapshot);
         return snapshot.exists() ? {id: snapshot.id, ...snapshot.data()}: null;
     } catch (error) {
         console.error(error);
@@ -49,7 +52,7 @@ export const deletedProductById = async (id) => {
         const snapshot = await getDoc(productRef);
 
         if (!snapshot.exists()) {
-          return false;
+            return false;
         }
 
         await deleteDoc(productRef);
@@ -58,4 +61,16 @@ export const deletedProductById = async (id) => {
         console.error(error);
     }
     
-}
+};
+
+export const updateProductById = async (productId, productData) => {
+    try {
+        const productRef = doc(productsCollection, productId);
+        // const snapshot = await getDoc(productRef);
+        const docRef = await updateDoc(productRef, productData);
+
+        return { id: productId,  ...productData};
+  } catch (error) {
+    console.error(error);
+  }
+};

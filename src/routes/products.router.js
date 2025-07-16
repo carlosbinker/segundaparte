@@ -1,8 +1,5 @@
 import { Router } from 'express';
 
-// Desestructuro el módulo Router desde express para el manejo de las rutas
-export { Router } from 'express';
-
 // Creo una instancia de Router
 const router = Router();
 

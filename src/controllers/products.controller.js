@@ -8,9 +8,15 @@ export const getAllProducts = async (req, res) => {
 };
 
 // Método GET - recibiendo query string en la URL en req.query
-export const searchProducts = (req, res) => {
-  const { nombre } = req.query;
-  const filteredProducts = model.searchProducts(nombre);
+export const searchProductsByField = async (req, res) => {
+  const query = Object.keys(req.query); // Me devuelve un array con las claves de la query string
+  const field = Object.keys(req.query)[0]; // Obtengo el field para filtrar (primera clave)
+  const value = req.query[field]; // Valor del field
+  // console.log(query);
+  // console.log(field);
+  // console.log(value);
+
+  const filteredProducts = await model.searchProductsByField(field, value);
   res.json(filteredProducts);
 };
 

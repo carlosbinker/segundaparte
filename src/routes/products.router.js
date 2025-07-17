@@ -8,11 +8,12 @@ const router = Router();
 
 import {
   getAllProducts,
-  searchProducts,
+  searchProductsByField,
   getProductById,
   addNewProduct,
   updatePutProductById,
-  updatePatchProductById,deleteProductById,
+  updatePatchProductById,
+  deleteProductById,
 } from "../controllers/products.controller.js";
 
 import { authentication }  from '../middlewares/authentication.js';
@@ -21,7 +22,7 @@ import { authentication }  from '../middlewares/authentication.js';
 router.get("/products", authentication, getAllProducts);
   
 // Segunda ruta con GET pero ahora empleando query string -- se cambió el orden, antes se había puesto como tercera opción.
-router.get("/products/search", searchProducts);
+router.get("/products/search", searchProductsByField);
   
 // Tercera ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
 router.get("/products/:id", authentication, getProductById);

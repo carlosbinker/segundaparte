@@ -1,7 +1,7 @@
 // Importo la BD
 import { db } from './firebase.js';
 
-import {collection, doc, getDocs, getDoc, addDoc, updateDoc, setDoc, deleteDoc} from 'firebase/firestore';
+import {collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, query, where} from 'firebase/firestore';
 // console.log(typeof collection);
 
 const productsCollection = collection(db, "products");
@@ -28,6 +28,27 @@ export const getProductById = async (id) => {
         return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
     } catch (error) {
         console.error(error);
+    }
+};
+
+/**
+ * Busca productos por un campo específico y su valor.
+ * 
+ * @param {string} field - Campo por el cual filtrar (ej: 'categoria', 'nombre'). 
+ * @param {string|number|boolean} value - Valor exacto a buscar.
+ * @returns {Array<object>} - Lista de productos que coinciden con el criterio.
+ */
+
+export async function searchProductsByField(field, value) {
+    try {
+        const q = query(productsCollection, where(field, "==", value));
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map((doc) => ({
+            id: doc.id, ...doc.data()
+        }));
+    } catch (error) {
+        console.error(`Error al buscar productos por ${field}:`, error);
+        throw error;
     }
 };
 
@@ -84,7 +105,6 @@ export const updatePatchProductById = async (productId, productData) => {
 export const deletedProductById = async (id) => {
     try {
         const productRef = doc(productsCollection, id);
-        console.log(productRef);
         const snapshot = await getDoc(productRef);
         if (!snapshot.exists()) {
             return false;

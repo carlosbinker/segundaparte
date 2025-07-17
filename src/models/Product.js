@@ -34,10 +34,10 @@ export const getProductById = async (id) => {
 
 // Crear un documento usando el método addDoc va por POST
 
-export const addNewProduct = async (data) => {
+export const addNewProduct = async (producto) => {
     try {
-        const docRef = await addDoc(productsCollection, data);
-        return { id: docRef.id, ...data };
+        const docRef = await addDoc(productsCollection, producto);
+        return { id: docRef.id, ...producto };
     } catch (error) {
         console.error(error);
     }

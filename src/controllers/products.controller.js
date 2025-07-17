@@ -22,8 +22,8 @@ export const getProductById = async (req, res) => {
     res.status(404).json({ error: "No existe el producto" });
   }
   res.json(product);
-  console.log(product);
-  // console.log(typeof product)
+  console.log("Producto solicitado mediante params:\n",product);
+  // console.log(typeof product);
 };
 
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body
@@ -33,14 +33,28 @@ export const addNewProduct = async (req, res) => {
   // const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero, keyWords });
   const newProduct = await model.addNewProduct(producto);
   res.status(201).json(newProduct);
+  console.log("Producto creado exitosamente\n", newProduct);
 };
 
 // Método PUT - Update Product, la actualización del producto se recibe por req.body al igual que POST
-export const updateProductById = async (req, res) => {
+export const updatePutProductById = async (req, res) => {
   const productId = req.params.id;
   const productData = req.body;
 
-  const updateProduct = await model.updateProductById(productId, productData);
+  const updateProduct = await model.updatePutProductById(productId, productData);
+  if (!updateProduct) {
+    return res.status(404).json({ error: "Producto no encontrado" });
+  }
+  res.status(200).json(updateProduct);
+  console.log("El producto actualizado es:\n", updateProduct);
+};
+
+// Método PATCH - Update Product, la actualización del producto se recibe por req.body al igual que POST
+export const updatePatchProductById = async (req, res) => {
+  const productId = req.params.id;
+  const productData = req.body;
+
+  const updateProduct = await model.updatePatchProductById(productId, productData);
   if (!updateProduct) {
     return res.status(404).json({ error: "Producto no encontrado" });
   }

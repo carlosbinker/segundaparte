@@ -29,8 +29,6 @@ import authRouter from "./src/routes/auth.router.js";
 app.use("/api/auth", authRouter);
 app.use("/api", auth, productsRouter); // Solicito autenticación en todas las rutas de los productos
 
-
-
 // Middleware propio para detectar que se escibe mal el recurso al que se quiere acceder (Error handle)
 app.use((req, res, next) => {
   res.status(404).json({ error: "Not found" });

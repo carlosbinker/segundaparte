@@ -7,8 +7,9 @@ export const auth = (req, res, next) => {
 // console.log(req.headers); // Examino los headers
 // next()};
     
-    const token = req.headers["authorization"]?.split(" ")[1];
-//   console.log(token)
+  const token = req.headers["authorization"]?.split(" ")[1];
+  console.log(req.headers);
+  console.log(token)
   if (!token) return res.status(401).json({ message: "Unauthorized user" });
   jwt.verify(token, secret_key, (err) => {
     if (err) return res.status(403);

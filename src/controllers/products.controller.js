@@ -42,6 +42,9 @@ export const getProductById = async (req, res) => {
 export const addNewProduct = async (req, res) => {
   // const { nombre, precio, vencimiento, perecedero, keyWords } = req.body;
   const producto = req.body;
+  if (!producto) {
+    return res.status(200).json({ "message": "No se introdujo ningún producto" });
+  }
   // const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero, keyWords });
   const newProduct = await model.addNewProduct(producto);
   res.status(201).json(newProduct);

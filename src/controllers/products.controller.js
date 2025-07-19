@@ -42,6 +42,7 @@ export const getProductById = async (req, res) => {
 export const addNewProduct = async (req, res) => {
   // const { nombre, precio, vencimiento, perecedero, keyWords } = req.body;
   const producto = req.body;
+  // console.log(producto);
   if (!producto) {
     return res.status(200).json({ "message": "No se introdujo ningún producto" });
   }

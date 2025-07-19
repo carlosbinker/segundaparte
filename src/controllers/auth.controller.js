@@ -7,16 +7,16 @@ const default_user = {
 };
 
 export async function login(req, res) {
-  // Capturo desde el body el objeto default_user
-  const { email, password } = req.body;
-
-  // Verificamos las credenciales del usuario
-  const user = { id: 1, email }; // Sólo pasamos el email, la password no por seguridad!
+  // console.log(req.body);
+  // Capturo desde el body el objeto user
+  const { email, password } = req.body; 
+  // Verificamos las credenciales del usuario que me llega por body
+  const payload = {id: 1}; // Sólo con guardar el id del usuario ya es correcto porque con él ya se lo puede buscar en la BD
   if (email === default_user.email && password === default_user.password) {
     // Genero el token sólo si la verificación de las credenciales fue exitosa!
-    const token = generateToken(user);
-      res.status(201).json({ "token": token });
+    const token = generateToken(payload);
+    res.status(201).json({ "token": token });
   } else {
-    res.sendStatus(401).json({ message: "Unauthorized user" });
+    res.Status(401).json({ message: "Unauthorized user" });
   }
 };

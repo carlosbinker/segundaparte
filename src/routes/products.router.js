@@ -16,30 +16,28 @@ import {
   deleteProductById,
 } from "../controllers/products.controller.js";
 
-import { authentication }  from '../middlewares/authentication.js';
-
 // Primera ruta con GET trayendo todos los productos
-router.get("/products", authentication, getAllProducts);
+router.get("/products", getAllProducts);
   
 // Segunda ruta con GET pero ahora empleando query string -- se cambió el orden, antes se había puesto como tercera opción.
 router.get("/products/search", searchProductsByField);
   
 // Tercera ruta con GET pero usando params (la idea es traer el producto indicado por el idproduct, ejemplo /products/2)
-router.get("/products/:id", authentication, getProductById);
+router.get("/products/:id", getProductById);
   
 // Cuarta ruta con POST
-router.post("/products", authentication, addNewProduct);
+router.post("/products", addNewProduct);
   
 // Quinta ruta ahora con método PUT
-router.put("/products/:id", authentication, updatePutProductById);
+router.put("/products/:id", updatePutProductById);
   
 // Sexta ruta con PATCH
-router.patch("/products/:id", authentication, updatePatchProductById);
+router.patch("/products/:id", updatePatchProductById);
   
 // Séptima ruta con DELETE
-router.delete("/products/:id", authentication, deleteProductById);
+router.delete("/products/:id", deleteProductById);
 
 // Exporto router por default para que en otro módulo se pueda cambiar el nombre (a diferencia de lo que sería una exportación nombrada)
-// Ejemplo de exportación nombrada const Hola = () => {}
+// Ejemplo de exportación nombrada export const Hola = () => {}
 
 export default router;

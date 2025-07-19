@@ -11,13 +11,19 @@ export const getAllProducts = async (req, res) => {
 export const searchProductsByField = async (req, res) => {
   const query = Object.keys(req.query); // Me devuelve un array con las claves de la query string
   const field = Object.keys(req.query)[0]; // Obtengo el field para filtrar (primera clave)
-  const value = req.query[field]; // Valor del field
-  // console.log(query);
-  // console.log(field);
-  // console.log(value);
+  let value = req.query[field]; // Valor del field
 
+  console.log(query);
+  console.log(field);
+  console.log(value);
+  
+  if (field == "precio") {
+    value = parseInt(value);
+  }
+  console.log(typeof value);
+  
   const filteredProducts = await model.searchProductsByField(field, value);
-  res.json(filteredProducts);
+  res.status(200).json(filteredProducts);
 };
 
 // Método GET - obtengo un solo documento referenciado por el id en la URL desde Firestore

@@ -7,7 +7,6 @@ import {collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, 
 const productsCollection = collection(db, "products");
 // console.log(productsCollection)
 
-// *********************Métodos GET*************************************
 //getAllProdusts --- Empleo de getDocs -- Traemos todos los documentos
 export const getAllProducts = async () => {
     try {

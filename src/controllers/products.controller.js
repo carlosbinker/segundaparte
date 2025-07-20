@@ -3,7 +3,7 @@ import * as model from '../models/Product.js'
 // Método GET - obtengo todos los productos de Firestore
 export const getAllProducts = async (req, res) => {
   const products = await model.getAllProducts();
-  res.send(products);
+  res.json(products);
   // console.log(products);
 };
 
@@ -31,10 +31,10 @@ export const getProductById = async (req, res) => {
   const { id } = req.params;
   const product = await model.getProductById(id);
   if (!product) {
-    res.status(404).json({ error: "No existe el producto" });
+    return res.status(404).json({ error: "No existe el producto" });
   }
   res.json(product);
-  console.log("Producto solicitado mediante params:\n",product);
+  // console.log("Producto solicitado mediante params:\n",product);
   // console.log(typeof product);
 };
 
@@ -42,7 +42,7 @@ export const getProductById = async (req, res) => {
 export const addNewProduct = async (req, res) => {
   // const { nombre, precio, vencimiento, perecedero, keyWords } = req.body;
   const producto = req.body;
-  // console.log(producto);
+  console.log(producto);
   if (!producto) {
     return res.status(200).json({ "message": "No se introdujo ningún producto" });
   }
@@ -87,5 +87,7 @@ export const deleteProductById = async (req, res) => {
   if (!deletedProduct) {
     return res.status(404).json({ error: "Producto no encontrado para su borrado" });
   }
-  res.status(204).send(); // La convención 204 indica que se borra un recurso y el send() indica que no tiene contenido
+  res.status(204).send(); // La convención 204 indica que se borra un recurso y el send() indica que no tiene contenido. No lleva cuerpo !!
+
+  /*Para tu escenario donde "el producto existía y se borró", res.status(204).send(); es la elección correcta y semánticamente adecuada según las convenciones de las API RESTful. No deberías intentar enviar un JSON con un 204.*/
 };

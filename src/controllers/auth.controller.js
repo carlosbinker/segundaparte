@@ -1,22 +1,23 @@
-import { generateToken } from "../utils/token-generator.js";
-// Creamos un usuario ficticio para la prueba de autenticación
+import jwt from "jsonwebtoken";
+
 const default_user = {
   id: 1,
   email: "user@email.com",
-  password: "strongPass123!",
+  password: "strongPass123",
 };
 
-export async function login(req, res) {
-  // console.log(req.body);
-  // Capturo desde el body el objeto user
-  const { email, password } = req.body; 
-  // Verificamos las credenciales del usuario que me llega por body
-  const payload = {id: 1}; // Sólo con guardar el id del usuario ya es correcto porque con él ya se lo puede buscar en la BD
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = { id: 1, email };
+
   if (email === default_user.email && password === default_user.password) {
-    // Genero el token sólo si la verificación de las credenciales fue exitosa!
-    const token = generateToken(payload);
-    res.status(201).json({ "token": token });
+    const payload = { id: user.id }; // Para mayor seguridad sólo conviene generar el payload con el ID del usuario
+    const expiration = { expiresIn: "1d" };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, expiration);
+    res.json({ token }); // Me imprime el token con la clave token
   } else {
-    res.status(401).json({ message: "Unauthorized user" });
+    res.sendStatus(401).json({ error: "Sus credenciales no coinciden ...." });
   }
 };

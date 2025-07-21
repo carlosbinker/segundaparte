@@ -30,7 +30,7 @@ Por tratarse de una BD NoSQL la estructura de cada documento puede tener cualqui
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./Imagen%20para%20readme.png)
 
 
-## A) Instalación
+## Instalación
 
 1. Clonar el repositorio
 2. Instalar las dependencias

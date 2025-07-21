@@ -12,11 +12,9 @@ export const searchProductsByField = async (req, res) => {
   const query = Object.keys(req.query); // Me devuelve un array con las claves de la query string
   const field = Object.keys(req.query)[0]; // Obtengo el field para filtrar (primera clave)
   let value = req.query[field]; // Valor del field
-
   console.log(query);
   console.log(field);
   console.log(value);
-  
   if (field == "precio") {
     value = parseInt(value);
   }

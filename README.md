@@ -85,62 +85,132 @@ npm run dev
         "Port": "Miami"
     },
     {
-        "id": "Et6u9lMFOnPQ4zuMmeRh",
-        "Excursiones": {
-            "Cozumel": [
-                "Buceo con esnórquel en el catamarán Fury y descanso en la playa",
-                "Buceo para buzos certificados"
-            ],
-            "Nassau": [
-                "Cerdos nadadores y escapada a la playa de Pearl Island",
-                "Día de playa y natación con delfines en la isla Laguna Azul"
-            ]
-        }
-    },
-    {
-        "id": "NUPgwzYI2AiC9N7C0YJX",
-        "vencimiento": "13/9/26",
-        "nombre": "queso Santa Rosa",
-        "precio": 19975
-    },
-    {
-        "id": "OOBAW2b049UCx9xtcGDV",
-        "nombre": "queso Santa Rosa",
-        "vencimiento": "13/9/26",
-        "precio": 19975
-    },
-    {
-        "id": "dJzwdQ3cSh6bLOHMoFm7",
-        "ship": "ALLURE OF THE SEAS",
-        "precio": 519,
-        "itinerario": [
-            "Miami",
-            "Sea Day 2",
-            "Cozumel",
-            "Sea Day 4",
-            "Nassau",
-            "Miami"
-        ],
-        "nombre": "5 Night Eastern Caribbean Cruise",
-        "imagenes": {
-            "Day 4 At the Sea": "",
-            "Nassau": "https://www.royalcaribbean.com/lac/es/shore-excursions/itinerary/5-night-eastern-caribbean-cruise-from-miami-on-allure/AL05MIA-2694212250?country=ARG",
-            "Day 2 At the Sea": "",
-            "End": "Miami",
-            "Miami": "",
-            "Cozumel": "https://www.royalcaribbean.com/lac/es/shore-excursions/itinerary/5-night-eastern-caribbean-cruise-from-miami-on-allure/AL05MIA-2694212250?country=ARG"
-        },
+    "id": "jFeywxYLDVqFXu2vntpP",
+    "ship": "Serenade of the Seas",
+    "Excursiones": {},
+    "precio": 34,
+    "disponibilidad": true,
+    "nombre": "3 Night Miami To Panama Cruise",
+    "itinerario": [
+        "Miami",
+        "At the Sea Day 2",
+        "At the Sea Day 3",
+        "Colón, Panamá"
+    ],
+    "Port": "Miami"
+},
+{
+        "id": "P99AYMY9nvPbtA2KEKPY",
+        "precio": 1429,
         "Port": "Miami",
+        "nombre": "14-Day Hawaii from Los Angeles, CA",
+        "ship": "Carnival Journeys",
         "Excursiones": {
-            "Cozumel": [
-                "Buceo con esnórquel en el catamarán Fury y descanso en la playa",
-                "Buceo para buzos certificados"
+            "Nawiliwili, Kauai": [
+                "Jewels Of Hawaii–Waterfall & Tropical Garden Tour",
+                "Discover Kauai"
             ],
-            "Nassau": [
-                "Cerdos nadadores y escapada a la playa de Pearl Island",
-                "Día de playa y natación con delfines en la isla Laguna Azul"
+            "Kahului, Maui": [
+                "Maui Tropical Plantation",
+                "Maui Ocean Center & Kumu Farms Market"
+            ],
+            "Hilo, Hawaii": [
+                "Volcano Wine Tasting Tour",
+                "Waterfalls Spectacular- Small Group"
+            ],
+            "Honolulu, Oahu": [
+                "Explore Oahu's North Shore",
+                "Germaine's Luau",
+                "Polynesian Cultural Center"
+            ],
+            "Ensenada": [
+                "Become a Tequila &Mezcal Connoisseur in theValley",
+                "Taste of Mexico & Margarita Madness"
             ]
         },
+        "itinerario": [
+            "Day 1: Long Beach (Los Angeles)",
+            "Day 2, 3, 4 & 5: Fun Day at Sea",
+            "Day 6: Honolulu, Oahu",
+            "Day 7: Kahului, Maui",
+            "Day 8: Nawiliwili, Kauai",
+            "Day 9: Hilo, Hawaii",
+            "Day 10, 11, 12 & 13: Fun Day at Sea",
+            "Day 14: Ensenada",
+            "Day 15: Long Beach (Los Angeles)"
+        ],
         "disponibilidad": true
     },
+    {
+    "id": "NG8D6RHwEPF8GHcVeAuy",
+    "ship": "MSC Fantasía",
+    "Excursiones": {
+        "Montevideo": [
+            "UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS",
+            "CONOCE MONTEVIDEO"
+        ],
+        "Buenos AIres": [
+            "RECORRIDO POR EL DELTA DEL RÍO PARANÁ",
+            "GRAN TOUR DE BUENOS AIRESr"
+        ],
+        "Río de Janeiro": [
+            "Ipanema, Leblón, Copacabana y Barra de Tijuca",
+            "Pan de Azúcar",
+            "Corcovado"
+        ],
+        "Buzios": [
+            "TRASLADO A LA PLAYA DE FERRADURA",
+            "EXCURSIÓN EN CANOA Y SNORKEL"
+        ],
+        "Ilhabella": [
+            "CASCADA Y LA PLAYA CURRAL POR 4X4",
+            "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"
+        ],
+        "Itajaí": [
+            "PARQUE UNIPRAIAS",
+            "CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"
+        ]
+    },
+    "precio": 1343,
+    "disponibilidad": false,
+    "nombre": "Sudamérica, 9 noches",
+    "itinerario": [
+        "Día 1: Montevideo",
+        "Día 2: Buenos Aires",
+        "Día 3 y 4 navegación",
+        "Día 5: Río de Janeiro",
+        "Día 6: Buzios",
+        "Día 7: Ilhabella",
+        "Día 8: Itajai",
+        "Día 9: navegación",
+        "Día 10:Montevideo"
+    ],
+    "Port": "Montevideo"
+}
+```
+### Obtener producto por ID
+
+- **GET** `/api/products/:id`
+- **Descripción:** Devuelve un producto específico por su ID.
+- **Parámetros:**
+  - `id` (path, requerido): ID del producto.
+- **Ejemplo de uso:** `/products/jFeywxYLDVqFXu2vntpP`
+- **Respuesta ejemplo:**
+
+```json
+{
+    "id": "jFeywxYLDVqFXu2vntpP",
+    "ship": "Serenade of the Seas",
+    "Excursiones": {},
+    "precio": 34,
+    "disponibilidad": true,
+    "nombre": "3 Night Miami To Panama Cruise",
+    "itinerario": [
+        "Miami",
+        "At the Sea Day 2",
+        "At the Sea Day 3",
+        "Colón, Panamá"
+    ],
+    "Port": "Miami"
+}
 ```

@@ -188,13 +188,13 @@ npm run dev
     "Port": "Montevideo"
 }
 ```
-### Obtener producto por ID
+### Obtener producto por ID mediante params
 
 - **GET** `/api/products/:id`
 - **Descripción:** Devuelve un producto específico por su ID.
 - **Parámetros:**
   - `id` (path, requerido): ID del producto.
-- **Ejemplo de uso:** `/products/jFeywxYLDVqFXu2vntpP`
+- **Ejemplo de uso:** `/api/products/jFeywxYLDVqFXu2vntpP`
 - **Respuesta ejemplo:**
 
 ```json
@@ -212,5 +212,158 @@ npm run dev
         "Colón, Panamá"
     ],
     "Port": "Miami"
+}
+```
+### Filtrar producto por ID mediante query string
+
+- **GET** `/api/products/search/?field=value`
+- **Descripción:** Devuelve un producto específico cuando field = value.
+  Para este caso se eligió filtrar por el campo nombre (string) o por el campo precio (number)
+- **Parámetros:**
+  - `id` (path, requerido): nombre y su valor exacto o el precio y su valor númerico exacto.
+- **Ejemplo de uso con nombre:** /api/products/search/?nombre=3 Night Miami To Panama Cruise
+- **Respuesta ejemplo:**
+```json
+{
+    "id": "jFeywxYLDVqFXu2vntpP",
+    "ship": "Serenade of the Seas",
+    "Excursiones": {},
+    "precio": 34,
+    "disponibilidad": true,
+    "nombre": "3 Night Miami To Panama Cruise",
+    "itinerario": [
+        "Miami",
+        "At the Sea Day 2",
+        "At the Sea Day 3",
+        "Colón, Panamá"
+    ],
+    "Port": "Miami"
+}
+```
+- **Ejemplo de uso con precio:** /api/products/search/?precio=1343
+- **Respuesta ejemplo:**
+```json
+{
+    "id": "NG8D6RHwEPF8GHcVeAuy",
+    "ship": "MSC Fantasía",
+    "Excursiones": {
+        "Montevideo": [
+            "UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS",
+            "CONOCE MONTEVIDEO"
+        ],
+        "Buenos AIres": [
+            "RECORRIDO POR EL DELTA DEL RÍO PARANÁ",
+            "GRAN TOUR DE BUENOS AIRESr"
+        ],
+        "Río de Janeiro": [
+            "Ipanema, Leblón, Copacabana y Barra de Tijuca",
+            "Pan de Azúcar",
+            "Corcovado"
+        ],
+        "Buzios": [
+            "TRASLADO A LA PLAYA DE FERRADURA",
+            "EXCURSIÓN EN CANOA Y SNORKEL"
+        ],
+        "Ilhabella": [
+            "CASCADA Y LA PLAYA CURRAL POR 4X4",
+            "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"
+        ],
+        "Itajaí": [
+            "PARQUE UNIPRAIAS",
+            "CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"
+        ]
+    },
+    "precio": 1343,
+    "disponibilidad": false,
+    "nombre": "Sudamérica, 9 noches",
+    "itinerario": [
+        "Día 1: Montevideo",
+        "Día 2: Buenos Aires",
+        "Día 3 y 4 navegación",
+        "Día 5: Río de Janeiro",
+        "Día 6: Buzios",
+        "Día 7: Ilhabella",
+        "Día 8: Itajai",
+        "Día 9: navegación",
+        "Día 10:Montevideo"
+    ],
+    "Port": "Montevideo"
+}
+```
+### Crear un producto
+
+- **POST** `/api/products`
+- **Descripción:** Crea un nuevo producto.
+- **Body (JSON):**
+
+```json
+{
+        "ship": "MSC Fantasía",
+        "Excursiones": {"Montevideo":["UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS", "CONOCE MONTEVIDEO"],"Buenos AIres":["RECORRIDO POR EL DELTA DEL RÍO PARANÁ", "GRAN TOUR DE BUENOS AIRESr"],
+        "Río de Janeiro":["Ipanema, Leblón, Copacabana y Barra de Tijuca","Pan de Azúcar", "Corcovado"], "Buzios":["TRASLADO A LA PLAYA DE FERRADURA","EXCURSIÓN EN CANOA Y SNORKEL"],"Ilhabella": ["CASCADA Y LA PLAYA CURRAL POR 4X4", "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"], "Itajaí":["PARQUE UNIPRAIAS", "CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"]},
+        "precio": 1343,
+        "disponibilidad": false,
+        "nombre": "Sudamérica, 9 noches",
+        "itinerario": [
+            "Día 1: Montevideo",
+            "Día 2: Buenos Aires",
+            "Día 3 y 4 navegación",  
+            "Día 5: Río de Janeiro",   
+            "Día 6: Buzios",
+            "Día 7: Ilhabella",
+            "Día 8: Itajai",
+            "Día 9: navegación",
+            "Día 10:Montevideo"
+        ],
+        "Port": "Montevideo"}
+```
+- **Ejemplo de respuesta :**
+  
+```json
+{
+    "id": "NG8D6RHwEPF8GHcVeAuy",
+    "ship": "MSC Fantasía",
+    "Excursiones": {
+        "Montevideo": [
+            "UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS",
+            "CONOCE MONTEVIDEO"
+        ],
+        "Buenos AIres": [
+            "RECORRIDO POR EL DELTA DEL RÍO PARANÁ",
+            "GRAN TOUR DE BUENOS AIRESr"
+        ],
+        "Río de Janeiro": [
+            "Ipanema, Leblón, Copacabana y Barra de Tijuca",
+            "Pan de Azúcar",
+            "Corcovado"
+        ],
+        "Buzios": [
+            "TRASLADO A LA PLAYA DE FERRADURA",
+            "EXCURSIÓN EN CANOA Y SNORKEL"
+        ],
+        "Ilhabella": [
+            "CASCADA Y LA PLAYA CURRAL POR 4X4",
+            "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"
+        ],
+        "Itajaí": [
+            "PARQUE UNIPRAIAS",
+            "CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"
+        ]
+    },
+    "precio": 1343,
+    "disponibilidad": false,
+    "nombre": "Sudamérica, 9 noches",
+    "itinerario": [
+        "Día 1: Montevideo",
+        "Día 2: Buenos Aires",
+        "Día 3 y 4 navegación",
+        "Día 5: Río de Janeiro",
+        "Día 6: Buzios",
+        "Día 7: Ilhabella",
+        "Día 8: Itajai",
+        "Día 9: navegación",
+        "Día 10:Montevideo"
+    ],
+    "Port": "Montevideo"
 }
 ```

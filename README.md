@@ -281,12 +281,12 @@ Por lo tanto si ahora pido /api/products/CKouPh9cdqr9, obtengo la siguiente resp
 - **DELETE** `/api/products/:id`
 - **Descripción:** Borra el producto de la colection productsa través de  su ID
 - Ejemplo de uso: `/api/products/id/P99AYMY9nvPbtA2KEKPY`
+- **Respuesta:** 204 No Content
 
 ## Autenticación `/api/products/auth/login`
 
 Devuelve un token que debe colocarse en el header bajo la denominacion Bearer token
 
-- **Respuesta:** 204 No Content
 - ## Códigos de estado utilizados
 
 - `200` - OK: Operación exitosa

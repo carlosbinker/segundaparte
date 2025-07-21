@@ -2,7 +2,7 @@
 # API Rest en Node.js
 En este repositorio se irán resolviendo los ejercicios propuestos desde la clase 9 a la clase 16, para así luego poder emprender el Proyecto final. -->
 
-# Proyecto Final API Rest con Node.js
+# Proyecto Final API Rest con Node.js con autenticación mediante JWT
 ## Resumen
 Se trata de una API REST para gestión de productos desarrollada con Node.js y Express. Los datos suministrados por la API se almacenan en una base de datos. En concreto se emplea  Firestore, que es una base de datos no relacional (NoSQL) de la plataforma Google Firebase. El ejemplo de la BD de productos consiste en la gestión de venta de cruceros. La estructura del documento persigue utilizar los tipos de datos más relevantes que suministra Firestore.  Se empleará la siguiente estructura de documento base:
 
@@ -26,6 +26,8 @@ Se trata de una API REST para gestión de productos desarrollada con Node.js y E
 **NOTA**: 
 
 Por tratarse de una BD NoSQL la estructura de cada documento puede tener cualquier formato (diferentes columnas y diferentes tipos de datos por cada columna; es una estructura muy flexible). Aunque por defecto son flexibles, muchas bases de datos de documentos (como MongoDB) permiten definir reglas de validación de esquema opcionales. Esto te permite imponer cierto nivel de consistencia si se necesita, sin perder la flexibilidad total.En este tipo de BD, al conjunto de todos los documentos se los llama colección (collection). El nombre de nuestra colleccón a emplear en esta API es **products**.
+
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./Imagen%20para%20readme.png)
 
 
 ## A) Instalación
@@ -217,7 +219,7 @@ npm run dev
     "Port": "Montevideo"
 }
 ```
-Ejemplo de uso: `/api/products/id`/CKouPh9cdqr9sUdaQlP1
+Ejemplo de uso: `/api/products/id/CKouPh9cdqr9sUdaQlP1`
 - **Ejemplo de respuesta :**
 ```json
 {
@@ -239,4 +241,69 @@ Por lo tanto si ahora pido /api/products/CKouPh9cdqr9, obtengo la siguiente resp
     "nombre": "Sudamérica, 9 noches",
     "Port": "Montevideo"
 }
+```
+### Actualizar un producto por ID 
+
+- **PATCH** `/api/products/:id`
+- **Descripción:** Reemplazo parcial del producto manteniendo su ID
+- Ejemplo de uso: `/api/products/id/NG8D6RHwEPF8GHcVeAuy`
+- **Body (JSON):**
+```json
+{
+    "ship": "MSC Fantasía",
+    "Excursiones": {
+        "Montevideo": ["UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS","CONOCE MONTEVIDEO"],"Buenos AIres": ["RECORRIDO POR EL DELTA DEL RÍO PARANÁ", "GRAN TOUR DE BUENOS AIRESr"], "Río de Janeiro": ["Ipanema, Leblón, Copacabana y Barra de Tijuca", "Pan de Azúcar","Corcovado"], "Buzios": ["TRASLADO A LA PLAYA DE FERRADURA","EXCURSIÓN EN CANOA Y SNORKEL"],"Ilhabella": ["CASCADA Y LA PLAYA CURRAL POR 4X4","VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"], "Itajaí": ["PARQUE UNIPRAIAS","CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"]},
+    "precio": 1343,
+    "disponibilidad": false,
+    "nombre": "Sudamérica, 9 noches",
+    "itinerario": ["Día 1: Montevideo", "Día 2: Buenos Aires", "Día 3 y 4 navegación", "Día 5: Río de Janeiro", "Día 6: Buzios",
+                    "Día 7: Ilhabella", "Día 8: Itajai", "Día 9: navegación", "Día 10:Montevideo"],
+    "Port": "Montevideo"}
+```
+- **Ejemplo de respuesta :**
+```json
+{
+    "id": "NG8D6RHwEPF8GHcVeAuy",
+    "ship": "MSC Fantasía",
+    "Excursiones": {"Buenos AIres": ["RECORRIDO POR EL DELTA DEL RÍO PARANÁ","GRAN TOUR DE BUENOS AIRESr"],
+        "Río de Janeiro": ["Ipanema, Leblón, Copacabana y Barra de Tijuca", "Pan de Azúcar","Corcovado"],
+        "Buzios": ["TRASLADO A LA PLAYA DE FERRADURA","EXCURSIÓN EN CANOA Y SNORKEL"],
+        "Ilhabella": ["CASCADA Y LA PLAYA CURRAL POR 4X4", "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"],
+        "Montevideo": ["UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS", "CONOCE MONTEVIDEO"]},
+    "precio": 1700,
+    "disponibilidad": true,
+    "nombre": "Sudamérica, 8 noches",
+    "itinerario": ["Día 1: Buenos Aires", "Día 2 y 3 navegación", "Día 4: Río de Janeiro", "Día 5: Buzios", "Día 6: Ilhabella","Día 7: navegación", "Día 8 :Montevideo", "Día 9: Buenos Aires" ],
+    "Port": "Buenos Aires"}
+```
+### Actualizar un producto por ID 
+
+- **DELETE** `/api/products/:id`
+- **Descripción:** Borra el producto de la colection productsa través de  su ID
+- Ejemplo de uso: `/api/products/id/P99AYMY9nvPbtA2KEKPY`
+
+## Autenticación `/api/products/auth/login`
+
+Devuelve un token que debe colocarse en el header bajo la denominacion Bearer token
+
+- **Respuesta:** 204 No Content
+- ## Códigos de estado utilizados
+
+- `200` - OK: Operación exitosa
+- `201` - Created: Recurso creado exitosamente
+- `204` - No Content: Recurso eliminado exitosamente
+- `400` - Bad Request: Datos de entrada inválidos
+- `404` - Not Found: Recurso no encontrado
+## Estructura del proyecto
+
+```
+src/
+├── Controllers/
+│   └── products.controller.js
+├── Models/
+│   └── Product.js
+├── Routes/
+│   └── products.router.js
+└── Middlewares/
+    └── auth.middleware.js
 ```

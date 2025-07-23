@@ -3,7 +3,7 @@ import * as model from '../models/Product.js'
 // Método GET - obtengo todos los productos de Firestore
 export const getAllProducts = async (req, res) => {
   const products = await model.getAllProducts();
-  res.json(products);
+  res.json(products); // El status de 200 OK lo introduce express por default cuando el request es existoso!
   // console.log(products);
 };
 
@@ -21,7 +21,7 @@ export const searchProductsByField = async (req, res) => {
   console.log(typeof value);
   
   const filteredProducts = await model.searchProductsByField(field, value);
-  res.status(200).json(filteredProducts);
+  res.status(200).json(filteredProducts); // No haría falta colocar el res.status(200), lo pone express por default.
 };
 
 // Método GET - obtengo un solo documento referenciado por el id en la URL desde Firestore
@@ -42,11 +42,11 @@ export const addNewProduct = async (req, res) => {
   const producto = req.body;
   console.log(producto);
   if (!producto) {
-    return res.status(200).json({ "message": "No se introdujo ningún producto" });
+    return res.status(400).json({ "message": "No se introdujo ningún producto" }); // status 400 Bad request!
   }
   // const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero, keyWords });
   const newProduct = await model.addNewProduct(producto);
-  res.status(201).json(newProduct);
+  res.status(201).json(newProduct); // status 201 indica recurso creado con éxito
   console.log("Producto creado exitosamente\n", newProduct);
 };
 
@@ -59,7 +59,7 @@ export const updatePutProductById = async (req, res) => {
   if (!updateProduct) {
     return res.status(404).json({ error: "Producto no encontrado" });
   }
-  res.status(200).json(updateProduct);
+  res.json(updateProduct);
   console.log("El producto actualizado es:\n", updateProduct);
 };
 
@@ -72,7 +72,7 @@ export const updatePatchProductById = async (req, res) => {
   if (!updateProduct) {
     return res.status(404).json({ error: "Producto no encontrado" });
   }
-  res.status(200).json(updateProduct);
+  res.json(updateProduct);
   console.log("El producto actualizado es:\n", updateProduct);
 };
 

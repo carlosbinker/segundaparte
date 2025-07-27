@@ -34,6 +34,24 @@ app.use((req, res, next) => {
   res.status(404).json({ error: "Not found" });
 });
 
+// Middleware de manejo de errores para JSON inválido
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        // console.error(err); // Opcional: loguear el error para depuración en el servidor
+        return res.status(400).json({
+            message: "Error de formato de JSON en la solicitud. Asegúrate de que el body sea JSON válido.",
+            error: err.message // Puedes incluir el mensaje de error original para más detalles
+        });
+    }
+    next(err); // Pasa otros errores al siguiente manejador de errores
+});
+
+// Opcional: Un manejador de errores genérico para otros tipos de errores
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Loguear el stack trace del error
+    res.status(500).send('Algo salió mal!');
+});
+
 //Escucho en el puerto 3000
 
 const PORT = process.env.PORT || 3001;

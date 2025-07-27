@@ -22,7 +22,6 @@ import {
 const usersCollection = collection(db, "users");
 
 //Obtener el id del usuario logueado
-
 export const token = async (user) => {
   const { username, password } = user;
   

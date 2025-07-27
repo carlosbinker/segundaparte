@@ -39,6 +39,8 @@ export const getProductById = async (id) => {
  */
 
 export async function searchProductsByField(field, value) {
+    console.log(typeof field);
+    console.log(typeof value);
     try {
         const q = query(productsCollection, where(field, "==", value));
         const snapshot = await getDocs(q);

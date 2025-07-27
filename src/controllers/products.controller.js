@@ -15,9 +15,10 @@ export const searchProductsByField = async (req, res) => {
   console.log(query);
   console.log(field);
   console.log(value);
-  if (field == "precio") {
-    value = parseInt(value);
+  if (field == "precio" || field == "price") {
+    value = parseFloat(value);
   }
+  console.log(value);
   console.log(typeof value);
   
   const filteredProducts = await model.searchProductsByField(field, value);

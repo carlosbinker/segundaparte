@@ -1,5 +1,10 @@
 // Importo la BD
 import { db } from "./firebase.js";
+import jwt from "jsonwebtoken";
+// Importo el módulo bcrypts para cifrar contraseñas
+import bcrypt from "bcrypt";
+import "dotenv/config";
+const secret_key = process.env.JWT_SECRET_KEY;
 
 import {
   collection,
@@ -13,38 +18,53 @@ import {
   query,
   where,
 } from "firebase/firestore";
-// console.log(typeof collection);
 
 const usersCollection = collection(db, "users");
-// console.log(usersCollection)
 
-//getAllProdusts --- Empleo de getDocs -- Traemos todos los documentos
-// export const getAllProducts = async () => {
-//     try {
-//         const snapshot = await getDocs(productsCollection);
-//         return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
+//Obtener el id del usuario logueado
 
-//getProductById --- Empleo de getDoc -- Trae un solo documento dado por el id
-// export const getuserById = async (id) => {
-//     try {
-//         const userRef = doc(usersCollection, id);
-//         //  const productRef = doc(db, 'products', id);
-//         const snapshot = await getDoc(userRef);
-//         // console.log(snapshot);
-//         return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
+export const token = async (user) => {
+  const { username, password } = user;
+  
+  try {
+    const q = query(usersCollection, where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+    // console.log(querySnapshot);
+    if (querySnapshot.empty) {
+      console.log("Credenciales incorrectas");
+      return false;
+    }
+    // Si esperas un solo resultado, obtén el primer documento
 
-// addNewUser --- Empleo de addDoc -- Crea un nuevo documento con cualquier estructura, el id lo genera automáticamente con un hash
+    const userDoc = querySnapshot.docs[0];
+    // Accede a los datos del documento usando .data()
+    const userData = userDoc.data();
+    // Ahora puedes acceder a las propiedades del usuario, como hashedPassword
+    const match = await bcrypt.compare(password, userData.hashedPassword);
+    if (match) {
+      const payload = { id: userDoc.id }; // Para mayor seguridad sólo conviene generar el payload con el ID del usuario
+      const expiration = { expiresIn: "1d" };
+      return jwt.sign(payload, secret_key, expiration); // Devuelvo el token del usuario logueado
+    } else {
+      return false;
+    }
+  }
+  catch (error) {
+    console.error("Error en la función  token: error");
+    return false; //INdica que hubo un error
+  }
+};
+
+// addNewUser -- register
 export const addNewUser = async (user) => {
-    try {
-        const docRef = await addDoc(usersCollection, user);
+  try {
+     const { username, password } = user;
+      // Cifra la contraseña usando bcrypt
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    user = { username, hashedPassword };
+
+    const docRef = await addDoc(usersCollection, user);
+    // console.log(docRef);
         return { id: docRef.id, ...user };
     } catch (error) {
         console.error(error);

@@ -27,7 +27,7 @@ Se trata de una API REST para gestión de productos desarrollada con Node.js y E
 
 Por tratarse de una BD NoSQL la estructura de cada documento puede tener cualquier formato (diferentes columnas y diferentes tipos de datos por cada columna; es una estructura muy flexible). Aunque por defecto son flexibles, muchas bases de datos de documentos (como MongoDB) permiten definir reglas de validación de esquema opcionales. Esto te permite imponer cierto nivel de consistencia si se necesita, sin perder la flexibilidad total.En este tipo de BD, al conjunto de todos los documentos se los llama colección (collection). El nombre de nuestra colleccón a emplear en esta API es **products**.
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./Imagen%20para%20readme.png)
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./readme.png)
 
 
 ## Instalación

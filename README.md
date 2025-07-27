@@ -138,7 +138,7 @@ Estructura del body:
 
 - **Ejemplo de petición** 
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./peticion-get-query-string.png)
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](request-get-query-string.png)
 
 - **Ejemplo de respuesta :**
 
@@ -161,67 +161,47 @@ Estructura del body:
 ```
 ### d) Agregar un producto a la BD
 
+- **Descripción:** el producto se envía por medio del body con la estructura deseada.
+
 - **Método POST** endpoint: `/api/products/`
+- **Ejemplo de respuesta:**
 
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./post.png)
 
 ### e) Actualización de un producto (reemplazo completo)
 
+- **Descripción:** en este caso el reemplazo del producto a partir de su ID resulta de manera completa. La actualización es enviada a través del body.
+
 - **Método PUT** endpoint: `/api/products/id`
+- **Ejemplo de respuesta:**
 
-```json
-```
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./put.png)
 
+### f) Actualización de un producto (reemplazo parcial)
 
+- **Descripción:** en este caso el reemplazo del producto a partir de su ID resulta de manera parcial. La actualización es enviada a través del body, y sólo se actualizarán los campos que modifiquen su valor o los campos nuevos que se agreguen, los cuales también se incorporarán al documento.
 
-- **PATCH** `/api/products/:id`
-- **Descripción:** Reemplazo parcial del producto manteniendo su ID
-- Ejemplo de uso: `/api/products/id/NG8D6RHwEPF8GHcVeAuy`
-- **Body (JSON):**
-```json
-{
-    "ship": "MSC Fantasía",
-    "Excursiones": {
-        "Montevideo": ["UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS","CONOCE MONTEVIDEO"],"Buenos AIres": ["RECORRIDO POR EL DELTA DEL RÍO PARANÁ", "GRAN TOUR DE BUENOS AIRESr"], "Río de Janeiro": ["Ipanema, Leblón, Copacabana y Barra de Tijuca", "Pan de Azúcar","Corcovado"], "Buzios": ["TRASLADO A LA PLAYA DE FERRADURA","EXCURSIÓN EN CANOA Y SNORKEL"],"Ilhabella": ["CASCADA Y LA PLAYA CURRAL POR 4X4","VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"], "Itajaí": ["PARQUE UNIPRAIAS","CONOCE BLUMENAU, EL PUEBLO GEMÁNICO Y EL MUSEO DE LA CERVEZA"]},
-    "precio": 1343,
-    "disponibilidad": false,
-    "nombre": "Sudamérica, 9 noches",
-    "itinerario": ["Día 1: Montevideo", "Día 2: Buenos Aires", "Día 3 y 4 navegación", "Día 5: Río de Janeiro", "Día 6: Buzios",
-                    "Día 7: Ilhabella", "Día 8: Itajai", "Día 9: navegación", "Día 10:Montevideo"],
-    "Port": "Montevideo"}
-```
+- **Método PATCH** `/api/products/id`
+
 - **Ejemplo de respuesta :**
-```json
-{
-    "id": "NG8D6RHwEPF8GHcVeAuy",
-    "ship": "MSC Fantasía",
-    "Excursiones": {"Buenos AIres": ["RECORRIDO POR EL DELTA DEL RÍO PARANÁ","GRAN TOUR DE BUENOS AIRESr"],
-        "Río de Janeiro": ["Ipanema, Leblón, Copacabana y Barra de Tijuca", "Pan de Azúcar","Corcovado"],
-        "Buzios": ["TRASLADO A LA PLAYA DE FERRADURA","EXCURSIÓN EN CANOA Y SNORKEL"],
-        "Ilhabella": ["CASCADA Y LA PLAYA CURRAL POR 4X4", "VIAJE A LA PLAYA DO JABAQUARA EN GOLETA"],
-        "Montevideo": ["UN SABOR DE MONTEVIDEO Y SUS MARAVILLOSOS VINOS", "CONOCE MONTEVIDEO"]},
-    "precio": 1700,
-    "disponibilidad": true,
-    "nombre": "Sudamérica, 8 noches",
-    "itinerario": ["Día 1: Buenos Aires", "Día 2 y 3 navegación", "Día 4: Río de Janeiro", "Día 5: Buzios", "Día 6: Ilhabella","Día 7: navegación", "Día 8 :Montevideo", "Día 9: Buenos Aires" ],
-    "Port": "Buenos Aires"}
-```
-### Actualizar un producto por ID 
+  
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](./patch.png)
 
-- **DELETE** `/api/products/:id`
-- **Descripción:** Borra el producto de la colection productsa través de  su ID
-- Ejemplo de uso: `/api/products/id/P99AYMY9nvPbtA2KEKPY`
-- **Respuesta:** 204 No Content
+### g) Borrado de un producto por ID 
 
+- **Descripción:** Borra el producto de la colection products a través de  su ID
 
+- **Método DELETE** `/api/products/id`
+
+- **Respuesta:** 204 No Content (si el ID es correcto)
 
 - ## Códigos de estado utilizados
 
-- `200` - OK: Operación exitosa
-- `201` - Created: Recurso creado exitosamente
-- `204` - No Content: Recurso eliminado exitosamente
-- `400` - Bad Request: Datos de entrada inválidos
-- `404` - Not Found: Recurso no encontrado
+- `200` - OK: operación exitosa
+- `201` - Created: recurso creado exitosamente
+- `204` - No Content: recurso eliminado exitosamente
+- `400` - Bad Request: datos de entrada inválidos
+- `404` - Not Found: recurso no encontrado
 ## Estructura del proyecto
 
 ```

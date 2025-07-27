@@ -11,7 +11,6 @@ const productsCollection = collection(db, "products");
 export const getAllProducts = async () => {
     try {
         const snapshot = await getDocs(productsCollection);
-        console.log(snapshot);
         return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     } catch (error) {
         console.error(error);
@@ -24,7 +23,7 @@ export const getProductById = async (id) => {
         const productRef = doc(productsCollection, id);
         //  const productRef = doc(db, 'products', id);
         const snapshot = await getDoc(productRef);
-        console.log(snapshot);
+        // console.log(snapshot);
         return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
     } catch (error) {
         console.error(error);
@@ -115,5 +114,3 @@ export const deletedProductById = async (id) => {
         console.error(error);
     }
 };
-
-

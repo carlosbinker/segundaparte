@@ -64,7 +64,7 @@ export const addNewUser = async (user) => {
 
     const docRef = await addDoc(usersCollection, user);
     // console.log(docRef);
-        return { id: docRef.id, ...user };
+        return {id: docRef.id}; // Devuelvo sólo el id del usuario registrado
     } catch (error) {
         console.error(error);
     }

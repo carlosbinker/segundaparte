@@ -39,13 +39,12 @@ export const getProductById = async (req, res) => {
 
 // Método POST - añadir nuevo producto, el nuevo objeto se recibe mediante req.body
 export const addNewProduct = async (req, res) => {
-  // const { nombre, precio, vencimiento, perecedero, keyWords } = req.body;
-  const producto = req.body;
-  console.log(producto);
-  if (!producto) {
+  const userId = req.userId; // Id del usuario logueado (capturado en el middleware de autenticación) 
+  if (!req.body) {
     return res.status(400).json({ "message": "No se introdujo ningún producto" }); // status 400 Bad request!
   }
-  // const newProduct = await model.addNewProduct({ nombre, precio, vencimiento, perecedero, keyWords });
+  const producto = { ...req.body, userId }; // Incorporo el Id del usuario al producto del usuario logueado
+
   const newProduct = await model.addNewProduct(producto);
   res.status(201).json(newProduct); // status 201 indica recurso creado con éxito
   console.log("Producto creado exitosamente\n", newProduct);
@@ -88,5 +87,5 @@ export const deleteProductById = async (req, res) => {
   }
   res.status(204).send(); // La convención 204 indica que se borra un recurso y el send() indica que no tiene contenido. No lleva cuerpo !!
 
-  /*Para tu escenario donde "el producto existía y se borró", res.status(204).send(); es la elección correcta y semánticamente adecuada según las convenciones de las API RESTful. No deberías intentar enviar un JSON con un 204.*/
+  /*Para el escenario donde "el producto existía y se borró", res.status(204).send(); es la elección correcta y semánticamente adecuada según las convenciones de las API RESTful. No se debería intentar enviar un JSON con un 204.*/
 };
